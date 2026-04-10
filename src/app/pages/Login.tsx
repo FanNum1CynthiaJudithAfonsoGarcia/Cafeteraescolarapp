@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import { Coffee } from 'lucide-react';
 
 export default function Login() {
@@ -69,6 +69,13 @@ export default function Login() {
 
           <div className="mt-6 text-center text-sm text-gray-500">
             <p>Credenciales de prueba: cualquier email y contraseña</p>
+          </div>
+
+          <div className="mt-4 text-center text-sm text-gray-600">
+            ¿No tienes cuenta?{' '}
+            <Link to="/register" className="text-amber-600 hover:text-amber-700 font-medium">
+              Regístrate aquí
+            </Link>
           </div>
         </div>
       </div>

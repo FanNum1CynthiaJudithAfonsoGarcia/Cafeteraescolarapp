@@ -1,5 +1,6 @@
 import { createBrowserRouter, redirect } from 'react-router';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Home from './pages/Home';
 import Category from './pages/Category';
 import Cart from './pages/Cart';
@@ -26,6 +27,11 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     Component: Login,
+    loader: loginLoader,
+  },
+  {
+    path: '/register',
+    Component: Register,
     loader: loginLoader,
   },
   {

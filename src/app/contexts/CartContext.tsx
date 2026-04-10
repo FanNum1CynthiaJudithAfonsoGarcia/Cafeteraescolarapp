@@ -7,15 +7,28 @@ export interface Product {
   category: string;
   image: string;
   description: string;
+  allergens?: string[];
+  customizable?: boolean;
+  customizationOptions?: {
+    extras?: Array<{ id: string; name: string; price: number }>;
+    removable?: string[];
+    breadOptions?: Array<{ id: string; name: string; price: number }>;
+  };
 }
 
 export interface CartItem extends Product {
   quantity: number;
+  customizations?: {
+    extras?: string[];
+    removed?: string[];
+    breadType?: string;
+  };
+  customizationPrice?: number;
 }
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, customizations?: CartItem['customizations'], customizationPrice?: number) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -28,7 +41,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, customizations?: CartItem['customizations'], customizationPrice?: number) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {
@@ -38,7 +51,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             : item
         );
       }
-      return [...prevItems, { ...product, quantity: 1 }];
+      return [...prevItems, { ...product, quantity: 1, customizations, customizationPrice }];
     });
   };
 
@@ -63,7 +76,10 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartItems.reduce((total, item) => {
+      const itemPrice = item.price + (item.customizationPrice || 0);
+      return total + (itemPrice * item.quantity);
+    }, 0);
   };
 
   const getTotalItems = () => {
