@@ -3,9 +3,9 @@ import { prisma } from '../lib/prisma';
 
 export const createPedido = async (req: Request, res: Response) => {
   try {
-    const { usuarioId, items } = req.body; 
+    const { usuarioId, items } = req.body;
     // items espera ser un array así: [{ productoId: 1, cantidad: 2 }]
-    
+
     if (!items || !Array.isArray(items)) {
       res.status(400).json({ error: 'El campo "items" es requerido y debe ser un array' });
       return;
@@ -27,7 +27,7 @@ export const createPedido = async (req: Request, res: Response) => {
         res.status(400).json({ error: `Producto con ID ${item.productoId} no encontrado` });
         return;
       }
-      
+
       const precioReal = Number(producto.precio);
       const cantidad = Number(item.cantidad);
       totalCalculado += precioReal * cantidad;
@@ -70,7 +70,7 @@ export const getPedidosByUsuario = async (req: Request, res: Response) => {
       where: { usuarioId: Number(usuarioId) },
       include: {
         detalles: {
-          include: { producto: { select: { nombre: true, imagen: true } } }
+          include: { producto: { select: { nombre: true } } }
         },
         pago: true
       },
