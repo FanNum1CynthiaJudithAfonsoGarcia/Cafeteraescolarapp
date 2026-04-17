@@ -4,6 +4,8 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Category from './pages/Category';
 import Cart from './pages/Cart';
+import { CheckoutPage } from './components/CheckoutForm';
+import PagoExitoso from './pages/PagoExitoso';
 
 // Protección de rutas - verificar autenticación
 const protectedLoader = () => {
@@ -49,4 +51,14 @@ export const router = createBrowserRouter([
     Component: Cart,
     loader: protectedLoader,
   },
+  {
+    path: '/pagar',
+    Component: CheckoutPage,
+    loader: protectedLoader,
+  },
+  {
+    path: '/pago-exitoso',
+    Component: PagoExitoso,
+    loader: protectedLoader,
+  }
 ]);

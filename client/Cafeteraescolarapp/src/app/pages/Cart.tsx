@@ -1,158 +1,14 @@
 import { useNavigate } from 'react-router';
-import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag, CreditCard, Printer } from 'lucide-react';
+import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag, CreditCard } from 'lucide-react';
 import { Header } from '../components/Header';
 import { useCart } from '../contexts/CartContext';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import { useState } from 'react';
-import { getCustomizationNames } from '../utils/formatCustomization';
-import { createPedido } from '../../services/api';
 
 export default function Cart() {
   const navigate = useNavigate();
-  const { cartItems, updateQuantity, removeFromCart, getTotalPrice, clearCart } = useCart();
-  const [showPayment, setShowPayment] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'cash'>('card');
-  const [cardNumber, setCardNumber] = useState('');
-  const [orderNumber, setOrderNumber] = useState('');
+  const { cartItems, updateQuantity, removeFromCart, getTotalPrice } = useCart();
 
-  const handleProceedToPayment = () => {
-    setShowPayment(true);
-  };
-
-  const handlePayment = async () => {
-    try {
-      // Preparamos los datos del carrito para el backend
-      const pedidoData = {
-        usuarioId: 1, // Cambia esto por el ID del usuario logueado cuando implementes la autenticación
-        items: cartItems.map(item => ({
-          productoId: Number(item.id), // Aseguramos que sea un número para Prisma
-          cantidad: item.quantity
-        }))
-      };
-
-      await createPedido(pedidoData);
-
-      // Generar número de pedido visual
-      const newOrderNumber = `PED-${Date.now().toString().slice(-6)}`;
-      setOrderNumber(newOrderNumber);
-      setShowSuccess(true);
-    } catch (error) {
-      console.error('Error al realizar el pedido:', error);
-      alert('Hubo un error al procesar tu pedido. Por favor, inténtalo de nuevo.');
-    }
-  };
-
-  const printTicket = () => {
-    const printWindow = window.open('', '', 'width=300,height=600');
-    if (!printWindow) return;
-
-    const ticketHTML = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Ticket - ${orderNumber}</title>
-          <style>
-            body {
-              font-family: 'Courier New', monospace;
-              padding: 20px;
-              max-width: 300px;
-            }
-            h1 { font-size: 18px; text-align: center; margin-bottom: 10px; }
-            .header { text-align: center; border-bottom: 2px dashed #000; padding-bottom: 10px; margin-bottom: 10px; }
-            .item { margin: 10px 0; }
-            .item-name { font-weight: bold; }
-            .customization { font-size: 11px; margin-left: 10px; color: #666; }
-            .total { border-top: 2px dashed #000; margin-top: 10px; padding-top: 10px; font-weight: bold; }
-            .footer { text-align: center; margin-top: 20px; font-size: 12px; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <h1>☕ CAFETERÍA ESCOLAR</h1>
-            <p>Pedido: ${orderNumber}</p>
-            <p>Fecha: ${new Date().toLocaleString('es-ES')}</p>
-          </div>
-          
-          ${cartItems.map(item => `
-            <div class="item">
-              <div class="item-name">${item.name} x${item.quantity}</div>
-              <div>${(item.price * item.quantity).toFixed(2)}€</div>
-              ${item.customizations ? `
-                ${item.customizations.breadType ? `<div class="customization">Pan: ${item.customizations.breadType}</div>` : ''}
-                ${item.customizations.extras && item.customizations.extras.length > 0 ?
-          `<div class="customization">Extras: ${item.customizations.extras.join(', ')}</div>` : ''}
-                ${item.customizations.removed && item.customizations.removed.length > 0 ?
-          `<div class="customization">Sin: ${item.customizations.removed.join(', ')}</div>` : ''}
-                ${item.customizationPrice ? `<div class="customization">Personalización: +${item.customizationPrice.toFixed(2)}€</div>` : ''}
-              ` : ''}
-            </div>
-          `).join('')}
-          
-          <div class="total">
-            <div>TOTAL: ${getTotalPrice().toFixed(2)}€</div>
-          </div>
-          
-          <div class="footer">
-            <p>¡Gracias por tu compra!</p>
-            <p>Recoge tu pedido en el mostrador</p>
-          </div>
-        </body>
-      </html>
-    `;
-
-    printWindow.document.write(ticketHTML);
-    printWindow.document.close();
-    printWindow.focus();
-    setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 250);
-  };
-
-  const handleFinish = () => {
-    clearCart();
-    setShowSuccess(false);
-    setShowPayment(false);
-    navigate('/');
-  };
-
-  if (showSuccess) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
-            <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="w-10 h-10 text-green-600" />
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">¡Pedido Realizado!</h2>
-            <p className="text-gray-600 mb-4">Tu pedido ha sido procesado correctamente</p>
-            <div className="bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-500 mb-1">Número de pedido</p>
-              <p className="text-2xl font-bold text-amber-700">{orderNumber}</p>
-            </div>
-            <div className="flex gap-3 justify-center">
-              <button
-                onClick={printTicket}
-                className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center gap-2"
-              >
-                <Printer className="w-5 h-5" />
-                Imprimir Ticket
-              </button>
-              <button
-                onClick={handleFinish}
-                className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Finalizar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+  // Si el carrito está vacío, mostramos el mensaje
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -243,11 +99,6 @@ export default function Cart() {
                           <span className="font-semibold text-amber-700 block">
                             {((item.price + (item.customizationPrice || 0)) * item.quantity).toFixed(2)}€
                           </span>
-                          {item.customizationPrice && item.customizationPrice > 0 && (
-                            <span className="text-xs text-gray-500">
-                              (+{item.customizationPrice.toFixed(2)}€ personalización)
-                            </span>
-                          )}
                         </div>
                         <button
                           onClick={() => removeFromCart(item.id)}
@@ -282,76 +133,15 @@ export default function Cart() {
                 </span>
               </div>
 
-              {!showPayment ? (
-                <button
-                  onClick={handleProceedToPayment}
-                  className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
-                >
-                  <CreditCard className="w-5 h-5" />
-                  Proceder al Pago
-                </button>
-              ) : (
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-gray-900">Método de Pago</h4>
+              {/* Botón que ahora te lleva a la pasarela */}
+              <button
+                onClick={() => navigate('/pagar')}
+                className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+              >
+                <CreditCard className="w-5 h-5" />
+                Proceder al Pago
+              </button>
 
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-3 p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                      <input
-                        type="radio"
-                        name="payment"
-                        checked={paymentMethod === 'card'}
-                        onChange={() => setPaymentMethod('card')}
-                        className="w-4 h-4 text-amber-600"
-                      />
-                      <CreditCard className="w-5 h-5 text-gray-600" />
-                      <span>Tarjeta</span>
-                    </label>
-
-                    <label className="flex items-center gap-3 p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                      <input
-                        type="radio"
-                        name="payment"
-                        checked={paymentMethod === 'cash'}
-                        onChange={() => setPaymentMethod('cash')}
-                        className="w-4 h-4 text-amber-600"
-                      />
-                      <span className="text-xl">💵</span>
-                      <span>Efectivo</span>
-                    </label>
-                  </div>
-
-                  {paymentMethod === 'card' && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Número de tarjeta
-                      </label>
-                      <input
-                        type="text"
-                        value={cardNumber}
-                        onChange={(e) => setCardNumber(e.target.value)}
-                        placeholder="1234 5678 9012 3456"
-                        maxLength={19}
-                        className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
-                      />
-                      <p className="text-xs text-gray-500 mt-1">Simulación - Introduce cualquier número</p>
-                    </div>
-                  )}
-
-                  <button
-                    onClick={handlePayment}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    Confirmar Pago
-                  </button>
-
-                  <button
-                    onClick={() => setShowPayment(false)}
-                    className="w-full text-gray-600 hover:text-gray-900 py-2 text-sm transition-colors"
-                  >
-                    Cancelar
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         </div>
