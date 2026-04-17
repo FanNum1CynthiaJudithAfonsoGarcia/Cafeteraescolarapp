@@ -20,21 +20,38 @@ export const getProductos = async (req: Request, res: Response) => {
 // Función para crear un producto nuevo
 export const createProducto = async (req: Request, res: Response) => {
   try {
-    // Extraemos los datos del cuerpo de la petición (body)
-    const { nombre, precio, categoriaId, alergenos } = req.body;
+    const { nombre, precio, categoriaId, alergenos, imagen } = req.body;
 
     const nuevoProducto = await prisma.producto.create({
       data: {
         nombre,
         precio,
         alergenos,
-        categoriaId: Number(categoriaId) // Aseguramos que sea número
+        imagen: imagen ?? null,
+        categoriaId: Number(categoriaId)
       }
     });
 
     res.status(201).json(nuevoProducto);
   } catch (error) {
     res.status(400).json({ error: 'Error al crear producto' });
+  }
+};
+
+// Función para actualizar la imagen de un producto
+export const updateProductoImagen = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { imagen } = req.body;
+
+    const updated = await prisma.producto.update({
+      where: { id: Number(id) },
+      data: { imagen }
+    });
+
+    res.json(updated);
+  } catch (error: any) {
+    res.status(400).json({ error: 'No se pudo actualizar la imagen', details: error.message });
   }
 };
 
