@@ -10,6 +10,8 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK || 'tu_pk_test_a
 const FormularioStripe = () => {
     const stripe = useStripe();
     const elements = useElements();
+    // 2. Traemos el carrito y el total aquí
+    const { cartItems, getTotalPrice } = useCart();
     const [cargando, setCargando] = useState(false);
     const [mensajeError, setMensajeError] = useState<string | null>(null);
 
@@ -20,6 +22,11 @@ const FormularioStripe = () => {
         setCargando(true);
         setMensajeError(null);
 
+        // 🔥 LA SOLUCIÓN: Guardamos el carrito en la memoria temporal del navegador antes de ir a Stripe
+        sessionStorage.setItem('ticketPendiente', JSON.stringify(cartItems));
+        sessionStorage.setItem('ticketTotal', getTotalPrice().toString());
+
+        // Confirmamos el pago con Stripe (esto recargará la página)
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {

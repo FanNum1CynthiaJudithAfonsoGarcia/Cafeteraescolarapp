@@ -62,6 +62,45 @@ export const createPedido = async (req: Request, res: Response) => {
   }
 };
 
+// Pedidos de un usuario concreto
+export const getPedidosByUsuario = async (req: Request, res: Response) => {
+  try {
+    const { usuarioId } = req.params;
+    const pedidos = await prisma.pedido.findMany({
+      where: { usuarioId: Number(usuarioId) },
+      include: {
+        detalles: {
+          include: { producto: { select: { nombre: true, imagen: true } } }
+        },
+        pago: true
+      },
+      orderBy: { fechaPedido: 'desc' }
+    });
+    res.json(pedidos);
+  } catch (error: any) {
+    res.status(500).json({ error: 'Error al obtener pedidos del usuario', details: error.message });
+  }
+};
+
+// Todos los pedidos — solo para ADMIN
+export const getAllPedidosAdmin = async (req: Request, res: Response) => {
+  try {
+    const pedidos = await prisma.pedido.findMany({
+      include: {
+        usuario: { select: { id: true, nombreCompleto: true, email: true, rol: true } },
+        detalles: {
+          include: { producto: { select: { nombre: true, precio: true } } }
+        },
+        pago: true
+      },
+      orderBy: { fechaPedido: 'desc' }
+    });
+    res.json(pedidos);
+  } catch (error: any) {
+    res.status(500).json({ error: 'Error al obtener todos los pedidos', details: error.message });
+  }
+};
+
 // Función para ver los pedidos de la cafetería
 export const getPedidos = async (req: Request, res: Response) => {
   try {

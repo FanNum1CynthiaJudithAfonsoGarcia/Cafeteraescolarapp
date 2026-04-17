@@ -9,7 +9,7 @@ export const getProductos = async (req: Request, res: Response) => {
         categoria: true // Debe coincidir con el nombre en schema.prisma (plural)
       }
     });
-    
+
     // Respondemos con JSON
     res.json(productos);
   } catch (error) {
@@ -17,24 +17,44 @@ export const getProductos = async (req: Request, res: Response) => {
   }
 };
 
+// Función para obtener todas las categorías
+export const getCategorias = async (req: Request, res: Response) => {
+  try {
+    const categorias = await prisma.categoria.findMany({
+      orderBy: { nombre: 'asc' }
+    });
+    res.json(categorias);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener categorías' });
+  }
+};
+
 // Función para crear un producto nuevo
 export const createProducto = async (req: Request, res: Response) => {
   try {
-    const { nombre, precio, categoriaId, alergenos, imagen } = req.body;
+    const { nombre, precio, categoriaId, alergenos, imagen, descripcion, tipo } = req.body;
+
+    if (!nombre || !precio || !categoriaId) {
+      res.status(400).json({ error: 'Faltan campos obligatorios: nombre, precio, categoriaId' });
+      return;
+    }
 
     const nuevoProducto = await prisma.producto.create({
       data: {
         nombre,
-        precio,
-        alergenos,
+        precio: Number(precio),
+        alergenos: alergenos ?? null,
         imagen: imagen ?? null,
+        descripcion: descripcion ?? null,
+        tipo: tipo ?? null,
         categoriaId: Number(categoriaId)
-      }
+      },
+      include: { categoria: true }
     });
 
     res.status(201).json(nuevoProducto);
-  } catch (error) {
-    res.status(400).json({ error: 'Error al crear producto' });
+  } catch (error: any) {
+    res.status(400).json({ error: 'Error al crear producto', details: error.message });
   }
 };
 
@@ -55,7 +75,7 @@ export const updateProductoImagen = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteProducto = async (req: Request, res: Response) => {  
+export const deleteProducto = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const productoEliminado = await prisma.producto.delete({
