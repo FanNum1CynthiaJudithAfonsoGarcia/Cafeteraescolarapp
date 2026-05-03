@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memoria de Proyecto — Cafetería Escolar App</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    /* ── Base ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 48px;
+    }
+
+    /* ── Encabezados ────────────────────────────────────── */
+    h1 {
+      font-size: 22px;
+      color: #1e3a5f;
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 8px;
+      margin: 32px 0 16px;
+    }
+    h2 {
+      font-size: 18px;
+      color: #1e3a5f;
+      border-left: 4px solid #2563eb;
+      padding-left: 12px;
+      margin: 28px 0 12px;
+    }
+    h3 {
+      font-size: 14px;
+      color: #374151;
+      margin: 20px 0 8px;
+      font-weight: bold;
+    }
+    h4 { font-size: 13px; color: #4b5563; margin: 16px 0 6px; }
+
+    /* ── Párrafos y texto ───────────────────────────────── */
+    p { margin: 8px 0; }
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11.5px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 3px;
+      padding: 1px 5px;
+    }
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 11.5px;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 14px 0;
+    }
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    /* ── Separadores ────────────────────────────────────── */
+    hr {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 28px 0;
+    }
+
+    /* ── Listas ─────────────────────────────────────────── */
+    ul, ol {
+      padding-left: 24px;
+      margin: 8px 0;
+    }
+    li { margin: 4px 0; }
+
+    /* ── Tablas ─────────────────────────────────────────── */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 14px 0;
+      font-size: 12px;
+    }
+    th {
+      background: #1e3a5f;
+      color: #fff;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    tr:nth-child(even) td { background: #f8fafc; }
+    tr:hover td { background: #eff6ff; }
+
+    /* ── Mermaid ─────────────────────────────────────────── */
+    .mermaid {
+      text-align: center;
+      margin: 20px 0;
+      padding: 16px;
+      background: #fafafa;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    /* ── Impresión ──────────────────────────────────────── */
+    @media print {
+      body { padding: 20px 32px; font-size: 11.5px; }
+      h1 { font-size: 18px; }
+      h2 { font-size: 15px; }
+      h3 { font-size: 12px; }
+      .mermaid { page-break-inside: avoid; }
+      table { page-break-inside: avoid; }
+      h2, h3 { page-break-after: avoid; }
+      pre { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<h1>MEMORIA DE PROYECTO INTERMODULAR — DAM</h1>
+<h2>Cafetería Escolar App</h2>
+
+<hr>
+
+<table>
+<thead><tr><th>Campo</th><th>Detalle</th></tr></thead>
+<p><tbody></p>
+<tr><td><strong>Ciclo formativo</strong></td><td>Desarrollo de Aplicaciones Multiplataforma (DAM)</td></tr>
+<tr><td><strong>Módulo</strong></td><td>Proyecto Intermodular</td></tr>
+<tr><td><strong>Nombre del proyecto</strong></td><td>Cafetería Escolar App</td></tr>
+<tr><td><strong>Tecnologías principales</strong></td><td>React · Node.js · Express · Prisma · MySQL · Stripe</td></tr>
+<tr><td><strong>Entorno de desarrollo</strong></td><td>Visual Studio Code · Git · GitHub</td></tr>
+<tr><td><strong>Fecha</strong></td><td>Abril 2026</td></tr>
+<p></tbody></table></p>
+
+<hr>
+
+<h2>Índice de contenidos</h2>
+
+<ul><li>[Introducción](#1-introducción)</li>
+<li>[Objetivos del Proyecto](#2-objetivos-del-proyecto)</li>
+<li>[Contexto y Justificación](#3-contexto-y-justificación)</li>
+<li>[Especificaciones del Proyecto](#4-especificaciones-del-proyecto)</li>
+<li>[Análisis de Requisitos](#5-análisis-de-requisitos)</li>
+<li>[Diseño de la Solución](#6-diseño-de-la-solución)</li>
+<li>[Desarrollo e Implementación](#7-desarrollo-e-implementación)</li>
+<li>[Pruebas de Validación](#8-pruebas-de-validación)</li>
+<li>[Conclusiones y Líneas de Mejora](#9-conclusiones-y-líneas-de-mejora)</li>
+<li>[Bibliografía](#10-bibliografía)</li>
+<li>[Anexos](#11-anexos)</li></ul>
+
+<hr>
+
+<h2>1. Introducción</h2>
+
+<h3>1.1 Presentación del proyecto</h3>
+
+<p><strong>Cafetería Escolar App</strong> es una aplicación web fullstack diseñada para digitalizar y optimizar el proceso de pedidos de una cafetería de centro escolar. Permite a los alumnos realizar sus pedidos de forma anticipada desde cualquier dispositivo con navegador, mientras que el personal de administración gestiona el catálogo de productos, los usuarios registrados y el historial de pedidos desde un panel dedicado.</p>
+
+<p>La aplicación cubre la totalidad del flujo de compra: registro e identificación del usuario, selección de productos por categoría con opciones de personalización, carrito de compra, pago en línea con tarjeta y confirmación con número de pedido. Opcionalmente, imprime un ticket físico en una impresora térmica conectada a la red local.</p>
+
+<h3>1.2 Contexto y necesidad de la solución propuesta</h3>
+
+<p>En muchos centros escolares, el proceso de compra en la cafetería genera largas colas a la hora del recreo, especialmente en los primeros minutos. Los alumnos pierden tiempo de descanso esperando, el personal de la cafetería se ve desbordado y los pedidos se pueden confundir o perder.</p>
+
+<p>La digitalización del proceso permite a los alumnos realizar su pedido antes del recreo, reduciendo la espera a un simple momento de recogida en el mostrador. Además, el control administrativo de usuarios e historial de pedidos facilita la gestión económica del negocio.</p>
+
+<h3>1.3 Funcionalidades principales del sistema</h3>
+
+<p>El sistema define tres tipos de usuario con distintos privilegios:</p>
+
+<table>
+<thead><tr><th>Rol</th><th>Descripción</th></tr></thead>
+<p><tbody></p>
+<tr><td><strong>CLIENTE</strong></td><td>Alumno del centro. Puede consultar el catálogo, hacer pedidos y ver su historial.</td></tr>
+<tr><td><strong>TUTOR</strong></td><td>Docente. Tiene las mismas capacidades que el cliente. Se registra con un código secreto.</td></tr>
+<tr><td><strong>ADMIN</strong></td><td>Personal de la cafetería. Gestiona todo el sistema desde el panel de administración.</td></tr>
+<p></tbody></table></p>
+
+<p>Las funcionalidades principales agrupadas por actor son:</p>
+
+<table>
+<thead><tr><th>Funcionalidad</th><th>Actor</th></tr></thead>
+<p><tbody></p>
+<tr><td>Registro e inicio de sesión</td><td>Cliente, Tutor, Admin</td></tr>
+<tr><td>Consulta del catálogo por categorías</td><td>Cliente, Tutor</td></tr>
+<tr><td>Añadir productos al carrito con personalización</td><td>Cliente, Tutor</td></tr>
+<tr><td>Pago con tarjeta (Stripe)</td><td>Cliente, Tutor</td></tr>
+<tr><td>Historial de pedidos propios</td><td>Cliente, Tutor</td></tr>
+<tr><td>Panel de administración (pedidos, usuarios, productos)</td><td>Admin</td></tr>
+<tr><td>Impresión de ticket térmico en red local</td><td>Sistema (automático)</td></tr>
+<p></tbody></table></p>
+
+<h3>1.4 Tecnologías empleadas en el desarrollo</h3>
+
+<p><strong>Frontend:</strong></p>
+<ul><li>React 18 + TypeScript — framework de interfaz</li>
+<li>Vite 6 — bundler y servidor de desarrollo</li>
+<li>Tailwind CSS 4 — estilos y diseño responsive</li>
+<li>React Router 7 — navegación SPA</li>
+<li>Stripe.js / @stripe/react-stripe-js — pasarela de pago</li></ul>
+
+<p><strong>Backend:</strong></p>
+<ul><li>Node.js + Express 5 + TypeScript — servidor REST</li>
+<li>Prisma ORM 6 — acceso y modelado de base de datos</li>
+<li>MySQL (TiDB Cloud) — base de datos relacional en la nube</li>
+<li>bcryptjs — cifrado de contraseñas</li>
+<li>Stripe SDK — procesamiento de pagos</li>
+<li>node-thermal-printer — impresión ESC/POS por TCP</li></ul>
+
+<p><strong>Herramientas:</strong></p>
+<ul><li>Nodemon + ts-node — ejecución en desarrollo</li>
+<li>Git + GitHub — control de versiones</li>
+<li>Dotenv — gestión de variables de entorno</li></ul>
+
+<hr>
+
+<h2>2. Objetivos del Proyecto</h2>
+
+<h3>2.1 Objetivo general</h3>
+
+<p>Desarrollar una aplicación web que permita a los alumnos de un centro escolar realizar pedidos anticipados en la cafetería, reduciendo las colas durante el recreo y mejorando la eficiencia del servicio mediante la digitalización completa del proceso de compra.</p>
+
+<h3>2.2 Objetivos específicos</h3>
+
+<ul><li><strong>Autenticación segura por roles:</strong> Implementar un sistema de registro y login con tres roles diferenciados (CLIENTE, TUTOR, ADMIN) y contraseñas cifradas con bcrypt.</li>
+<li><strong>Catálogo dinámico:</strong> Mostrar los productos agrupados por categoría, recuperados desde la base de datos en tiempo real.</li>
+<li><strong>Carrito personalizable:</strong> Permitir a los usuarios añadir productos con opciones de personalización (tipos de pan, extras, ingredientes a eliminar).</li>
+<li><strong>Pago en línea:</strong> Integrar la pasarela de pago Stripe para aceptar pagos con tarjeta de forma segura.</li>
+<li><strong>Panel de administración:</strong> Proporcionar al administrador herramientas para gestionar pedidos, usuarios y el catálogo de productos sin necesidad de acceder directamente a la base de datos.</li>
+<li><strong>Impresión de tickets:</strong> Generar e imprimir tickets en formato ESC/POS en una impresora térmica de red al confirmar cada pedido.</li>
+<li><strong>Diseño responsive:</strong> Garantizar una experiencia de usuario óptima tanto en dispositivos móviles como en escritorio.</li></ul>
+
+<hr>
+
+<h2>3. Contexto y Justificación</h2>
+
+<h3>3.1 Problema detectado o necesidad a cubrir</h3>
+
+<p>El proceso tradicional de compra en la cafetería escolar presenta los siguientes problemas:</p>
+
+<ul><li><strong>Colas excesivas:</strong> La concentración de todos los alumnos en el mismo momento del recreo genera tiempos de espera de hasta 15-20 minutos.</li>
+<li><strong>Errores en pedidos:</strong> La comunicación verbal de pedidos complejos (bocadillos personalizados, restricciones alimentarias) provoca errores frecuentes.</li>
+<li><strong>Falta de trazabilidad:</strong> No existe registro digital de las ventas, dificultando el control económico y el análisis de la demanda.</li>
+<li><strong>Gestión de alergenos manual:</strong> Los alumnos con alergias alimentarias deben recordar comunicarlas en cada compra, con el riesgo que ello conlleva.</li></ul>
+
+<h3>3.2 Justificación tecnológica del desarrollo</h3>
+
+<p>Se ha optado por una arquitectura web SPA (Single Page Application) por los siguientes motivos:</p>
+
+<ul><li><strong>Accesibilidad universal:</strong> Funciona en cualquier dispositivo con navegador sin necesidad de instalación.</li>
+<li><strong>Prisma ORM:</strong> Abstrae el acceso a la base de datos, facilitando el mantenimiento y la posible migración de gestor (MySQL → PostgreSQL, SQLite…) con cambios mínimos.</li>
+<li><strong>Stripe:</strong> Es la solución de pagos en línea más utilizada a nivel empresarial, con amplia documentación y cumplimiento PCI-DSS.</li>
+<li><strong>TiDB Cloud (MySQL):</strong> Base de datos relacional en la nube con alta disponibilidad, sin necesidad de gestionar infraestructura de servidor de BD.</li>
+<li><strong>TypeScript en ambas capas:</strong> Añade tipado estático, reduciendo errores en tiempo de desarrollo y mejorando la mantenibilidad.</li></ul>
+
+<h3>3.3 Impacto esperado y valor aportado</h3>
+
+<ul><li>Reducción del tiempo de espera en el mostrador a menos de 2 minutos por alumno.</li>
+<li>Eliminación de errores en pedidos personalizados al registrarlos digitalmente.</li>
+<li>Registro automático de todas las transacciones para control financiero.</li>
+<li>Gestión centralizada de alergenos por usuario en la base de datos.</li></ul>
+
+<hr>
+
+<h2>4. Especificaciones del Proyecto</h2>
+
+<h3>4.1 Funcionalidades clave del sistema</h3>
+
+<table>
+<thead><tr><th>ID</th><th>Funcionalidad</th><th>Descripción</th></tr></thead>
+<p><tbody></p>
+<tr><td>F01</td><td>Registro de usuario</td><td>Formulario con nombre, email, contraseña, horario y alergenos. Roles: CLIENTE, TUTOR (código), ADMIN (código)</td></tr>
+<tr><td>F02</td><td>Login</td><td>Email + contraseña. Sesión persistida en localStorage</td></tr>
+<tr><td>F03</td><td>Catálogo por categorías</td><td>Home con cards de categorías. Navegación a lista de productos por categoría</td></tr>
+<tr><td>F04</td><td>Detalle de producto</td><td>Imagen, precio, descripción, alergenos y botón de añadir al carrito</td></tr>
+<tr><td>F05</td><td>Personalización</td><td>Modal con extras, ingredientes a eliminar y tipo de pan (bocadillos)</td></tr>
+<tr><td>F06</td><td>Carrito</td><td>Resumen de artículos, ajuste de cantidades, eliminar, total</td></tr>
+<tr><td>F07</td><td>Pago con Stripe</td><td>Formulario de tarjeta integrado con Stripe Elements</td></tr>
+<tr><td>F08</td><td>Confirmación de pedido</td><td>Página de éxito con número de pedido</td></tr>
+<tr><td>F09</td><td>Historial de pedidos</td><td>Lista de pedidos anteriores del usuario con detalles</td></tr>
+<tr><td>F10</td><td>Panel Admin — Pedidos</td><td>Listado completo con búsqueda y detalles expandibles</td></tr>
+<tr><td>F11</td><td>Panel Admin — Usuarios</td><td>Lista, búsqueda y eliminación de usuarios</td></tr>
+<tr><td>F12</td><td>Panel Admin — Productos</td><td>Lista, alta y baja de productos con formulario</td></tr>
+<tr><td>F13</td><td>Impresión de ticket</td><td>Ticket ESC/POS enviado por TCP a impresora térmica</td></tr>
+<p></tbody></table></p>
+
+<h3>4.2 Requisitos no funcionales generales</h3>
+
+<table>
+<thead><tr><th>Tipo</th><th>Requisito</th></tr></thead>
+<p><tbody></p>
+<tr><td><strong>Seguridad</strong></td><td>Contraseñas cifradas con bcrypt (salt 10). Claves API en variables de entorno (.env). HTTPS en producción</td></tr>
+<tr><td><strong>Usabilidad</strong></td><td>Interfaz responsive (mobile-first). Feedback visual en carga y errores. Navegación intuitiva</td></tr>
+<tr><td><strong>Rendimiento</strong></td><td>Backend en memoria con singleton Prisma (evita múltiples conexiones). Lazy loading de productos</td></tr>
+<tr><td><strong>Disponibilidad</strong></td><td>Base de datos en TiDB Cloud con SLA de alta disponibilidad</td></tr>
+<tr><td><strong>Mantenibilidad</strong></td><td>TypeScript en cliente y servidor. Estructura MVC en backend</td></tr>
+<p></tbody></table></p>
+
+<hr>
+
+<h2>5. Análisis de Requisitos</h2>
+
+<h3>5.1 Requisitos funcionales</h3>
+
+<p><strong>RF-01 — Gestión de usuarios</strong></p>
+<ul><li>El sistema debe permitir el registro de nuevos usuarios con los campos: nombre completo, email (único), contraseña (mínimo hash bcrypt), rol, horario y alergenos.</li>
+<li>El sistema debe validar el código secreto para los roles TUTOR y ADMIN.</li>
+<li>El sistema debe autenticar usuarios mediante email y contraseña.</li>
+<li>La sesión debe persistir entre recargas de página mediante localStorage.</li></ul>
+
+<p><strong>RF-02 — Catálogo de productos</strong></p>
+<ul><li>El sistema debe mostrar las categorías de productos disponibles en la página de inicio.</li>
+<li>El sistema debe mostrar los productos pertenecientes a una categoría seleccionada.</li>
+<li>Cada producto debe mostrar: nombre, precio, imagen, descripción y alergenos.</li>
+<li>El sistema debe permitir personalizar ciertos productos (bocadillos: tipo de pan, extras, sin ingredientes).</li></ul>
+
+<p><strong>RF-03 — Carrito de compra</strong></p>
+<ul><li>El sistema debe permitir añadir productos al carrito con su cantidad y opciones de personalización.</li>
+<li>El sistema debe calcular el precio total incluyendo extras.</li>
+<li>El usuario debe poder modificar cantidades y eliminar productos del carrito.</li></ul>
+
+<p><strong>RF-04 — Proceso de pago</strong></p>
+<ul><li>El sistema debe crear un PaymentIntent en Stripe con el importe calculado en servidor.</li>
+<li>El sistema debe mostrar un formulario de tarjeta seguro (Stripe Elements).</li>
+<li>Tras el pago exitoso, el sistema debe crear el pedido en la base de datos.</li>
+<li>El sistema debe redirigir a una página de confirmación con el número de pedido.</li></ul>
+
+<p><strong>RF-05 — Historial</strong></p>
+<ul><li>El sistema debe mostrar al usuario todos sus pedidos anteriores con fecha, artículos y total.</li></ul>
+
+<p><strong>RF-06 — Administración</strong></p>
+<ul><li>El ADMIN debe poder ver todos los pedidos con búsqueda por usuario/email.</li>
+<li>El ADMIN debe poder ver, buscar y eliminar usuarios (no a sí mismo).</li>
+<li>El ADMIN debe poder ver, crear y eliminar productos del catálogo.</li></ul>
+
+<p><strong>RF-07 — Impresión</strong></p>
+<ul><li>El sistema debe intentar imprimir un ticket ESC/POS en la IP configurada al confirmar el pedido.</li>
+<li>Si la impresora no está disponible, el sistema debe continuar sin error para el usuario.</li></ul>
+
+<h3>5.2 Requisitos no funcionales detallados</h3>
+
+<table>
+<thead><tr><th>ID</th><th>Tipo</th><th>Descripción</th></tr></thead>
+<p><tbody></p>
+<tr><td>RNF-01</td><td>Seguridad</td><td>Las contraseñas nunca se devuelven en las respuestas de la API</td></tr>
+<tr><td>RNF-02</td><td>Seguridad</td><td>El importe del pago se calcula siempre en servidor, nunca en cliente</td></tr>
+<tr><td>RNF-03</td><td>Seguridad</td><td>Las rutas de Admin están protegidas con <code>adminLoader</code> que verifica el rol en localStorage</td></tr>
+<tr><td>RNF-04</td><td>Usabilidad</td><td>Todos los formularios muestran indicadores de carga (spinner) durante las peticiones</td></tr>
+<tr><td>RNF-05</td><td>Usabilidad</td><td>El panel admin es responsive: sidebar en escritorio, tab-bar inferior en móvil</td></tr>
+<tr><td>RNF-06</td><td>Disponibilidad</td><td>La impresora térmica es opcional; su ausencia no bloquea ningún flujo de usuario</td></tr>
+<tr><td>RNF-07</td><td>Rendimiento</td><td>El cliente Prisma se instancia una sola vez (singleton pattern) para evitar conexiones duplicadas</td></tr>
+<p></tbody></table></p>
+
+<hr>
+
+<h2>6. Diseño de la Solución</h2>
+
+<h3>6.1 Arquitectura del sistema</h3>
+
+<p>La aplicación sigue una arquitectura <strong>cliente-servidor desacoplada</strong> (SPA + API REST):</p>
+
+<p><strong>Modelo de comunicación:</strong></p>
+<ul><li>El frontend (React SPA) se comunica con el backend (Express) mediante peticiones HTTP REST.</li>
+<li>El backend es el único que accede a la base de datos (Prisma → MySQL/TiDB Cloud).</li>
+<li>El pago se gestiona entre el frontend y Stripe directamente, usando el <code>client_secret</code> generado por el backend.</li>
+<li>La impresora térmica se conecta directamente al backend mediante TCP.</li></ul>
+
+<p><strong>Tecnologías base en cada capa:</strong></p>
+
+<table>
+<thead><tr><th>Capa</th><th>Tecnología</th></tr></thead>
+<p><tbody></p>
+<tr><td>Presentación</td><td>React 18 + TypeScript + Tailwind CSS 4</td></tr>
+<tr><td>Comunicación</td><td>Fetch API (cliente) / Express Router (servidor)</td></tr>
+<tr><td>Lógica de negocio</td><td>Controladores Express + TypeScript</td></tr>
+<tr><td>Acceso a datos</td><td>Prisma ORM 6</td></tr>
+<tr><td>Base de datos</td><td>MySQL 8 en TiDB Cloud (eu-central-1)</td></tr>
+<tr><td>Autenticación</td><td>bcryptjs + localStorage</td></tr>
+<tr><td>Pagos</td><td>Stripe SDK (cliente + servidor)</td></tr>
+<tr><td>Impresión</td><td>node-thermal-printer (ESC/POS por TCP)</td></tr>
+<p></tbody></table></p>
+
+<p><strong>Herramientas complementarias:</strong></p>
+<ul><li><code>dotenv</code> — carga de variables de entorno en el servidor</li>
+<li><code>cors</code> — habilitación CORS entre frontend (<code>:5173</code>) y backend (<code>:3000</code>)</li>
+<li><code>nodemon</code> + <code>ts-node</code> — ejecución y hot-reload en desarrollo</li>
+<li>Vite — bundler del frontend con HMR</li></ul>
+
+<h3>6.2 Diagrama de arquitectura</h3>
+
+<p>``<code>mermaid</p>
+<p>graph TB</p>
+<p>subgraph CLIENTE["Cliente - Navegador :5173"]</p>
+<p>UI["React SPA\n(Vite + TypeScript)"]</p>
+<p>RC["React Router\n(rutas protegidas)"]</p>
+<p>CTX["Contextos\nAuthContext / CartContext"]</p>
+<p>STRIPE_FE["Stripe Elements\n(formulario tarjeta)"]</p>
+<p>end</p>
+
+<p>subgraph SERVIDOR["Servidor - Node.js :3000"]</p>
+<p>EX["Express 5\nMiddlewares CORS + JSON"]</p>
+<p>RT["Routers\n/productos /pedidos /usuarios /pagos"]</p>
+<p>CT["Controladores\nproduct pedido usuario payment"]</p>
+<p>PRI["Prisma Client\n(singleton)"]</p>
+<p>STRIPE_BE["Stripe SDK\n(PaymentIntent)"]</p>
+<p>PRINT["node-thermal-printer\n(ESC/POS TCP)"]</p>
+<p>end</p>
+
+<p>subgraph EXTERNOS["Servicios Externos"]</p>
+<p>DB[("TiDB Cloud\nMySQL 8")]</p>
+<p>STRIPE_API["Stripe API\n(pagos)"]</p>
+<p>PRINTER["Impresora Termica\n(TCP :9100)"]</p>
+<p>end</p>
+
+<p>UI --> RC</p>
+<p>RC --> CTX</p>
+<p>UI -->|fetch HTTP REST| EX</p>
+<p>UI --> STRIPE_FE</p>
+<p>STRIPE_FE -->|confirmPayment| STRIPE_API</p>
+
+<p>EX --> RT --> CT</p>
+<p>CT --> PRI --> DB</p>
+<p>CT --> STRIPE_BE --> STRIPE_API</p>
+<p>CT --> PRINT --> PRINTER</p>
+
+<p>style DB fill:#4a90d9,color:#fff</p>
+<p>style STRIPE_API fill:#6772e5,color:#fff</p>
+<p>style PRINTER fill:#888,color:#fff</p>
+<p></code>`<code></p>
+
+<h3>6.3 Diseño de base de datos — Diagrama Entidad-Relación</h3>
+
+<p><strong>Entidades:</strong></p>
+
+<table>
+<thead><tr><th>Entidad (tabla)</th><th>Descripción</th></tr></thead>
+<p><tbody></p>
+<tr><td></code>usuarios<code></td><td>Personas registradas en el sistema</td></tr>
+<tr><td></code>categorias<code></td><td>Agrupaciones del catálogo (Bebidas calientes, Bocadillos…)</td></tr>
+<tr><td></code>productos<code></td><td>Artículos disponibles en la cafetería</td></tr>
+<tr><td></code>pedidos<code></td><td>Cabecera de cada orden realizada por un usuario</td></tr>
+<tr><td></code>detalle_pedidos<code></td><td>Líneas de cada pedido (producto + cantidad + precio)</td></tr>
+<tr><td></code>pagos<code></td><td>Registro del pago asociado a un pedido</td></tr>
+<p></tbody></table></p>
+
+<p><strong>Relaciones:</strong></p>
+
+<ul><li>Un </code>Usuario<code> tiene muchos </code>Pedidos<code> (1:N)</li>
+<li>Una </code>Categoria<code> tiene muchos </code>Productos<code> (1:N)</li>
+<li>Un </code>Pedido<code> tiene muchos </code>DetallePedidos<code> (1:N)</li>
+<li>Un </code>Producto<code> aparece en muchos </code>DetallePedidos<code> (1:N)</li>
+<li>Un </code>Pedido<code> tiene como máximo un </code>Pago<code> (1:1)</li></ul>
+
+<p></code>`<code>mermaid</p>
+<p>erDiagram</p>
+<p>USUARIOS {</p>
+<p>int id PK</p>
+<p>varchar nombre_completo</p>
+<p>varchar email UK</p>
+<p>varchar password</p>
+<p>varchar rol</p>
+<p>varchar codigo_tutor</p>
+<p>varchar horario</p>
+<p>varchar alergenos</p>
+<p>}</p>
+
+<p>PEDIDOS {</p>
+<p>int id PK</p>
+<p>int usuario_id FK</p>
+<p>decimal total</p>
+<p>datetime fecha_pedido</p>
+<p>datetime fecha_actualizacion</p>
+<p>}</p>
+
+<p>DETALLE_PEDIDOS {</p>
+<p>int id PK</p>
+<p>int pedido_id FK</p>
+<p>int producto_id FK</p>
+<p>int cantidad</p>
+<p>decimal precio_unitario</p>
+<p>}</p>
+
+<p>PRODUCTOS {</p>
+<p>int id PK</p>
+<p>int categoria_id FK</p>
+<p>varchar nombre</p>
+<p>decimal precio</p>
+<p>varchar imagen</p>
+<p>varchar descripcion</p>
+<p>varchar tipo</p>
+<p>varchar alergenos</p>
+<p>boolean disponible</p>
+<p>datetime fecha_creacion</p>
+<p>}</p>
+
+<p>CATEGORIAS {</p>
+<p>int id PK</p>
+<p>varchar nombre</p>
+<p>}</p>
+
+<p>PAGOS {</p>
+<p>int id PK</p>
+<p>int pedido_id FK</p>
+<p>decimal monto</p>
+<p>varchar metodo</p>
+<p>datetime fecha_pago</p>
+<p>}</p>
+
+<p>USUARIOS ||--o{ PEDIDOS : "realiza"</p>
+<p>PEDIDOS ||--o{ DETALLE_PEDIDOS : "contiene"</p>
+<p>PRODUCTOS ||--o{ DETALLE_PEDIDOS : "incluido en"</p>
+<p>CATEGORIAS ||--o{ PRODUCTOS : "agrupa"</p>
+<p>PEDIDOS ||--o| PAGOS : "tiene"</p>
+<p></code>`<code></p>
+
+<hr>
+
+<h2>7. Desarrollo e Implementación</h2>
+
+<h3>7.1 Tecnologías utilizadas</h3>
+
+<table>
+<thead><tr><th>Área</th><th>Tecnología</th><th>Versión</th></tr></thead>
+<p><tbody></p>
+<tr><td>Frontend framework</td><td>React</td><td>18.3.1</td></tr>
+<tr><td>Lenguaje</td><td>TypeScript</td><td>5.x</td></tr>
+<tr><td>Bundler</td><td>Vite</td><td>6.3.5</td></tr>
+<tr><td>Estilos</td><td>Tailwind CSS</td><td>4.1.12</td></tr>
+<tr><td>Enrutamiento</td><td>React Router</td><td>7.13.0</td></tr>
+<tr><td>Componentes UI</td><td>Radix UI, Lucide React, MUI</td><td>varias</td></tr>
+<tr><td>Pagos (cliente)</td><td>@stripe/react-stripe-js</td><td>^6.2.0</td></tr>
+<tr><td>Backend runtime</td><td>Node.js</td><td>LTS</td></tr>
+<tr><td>Servidor HTTP</td><td>Express</td><td>5.2.1</td></tr>
+<tr><td>ORM</td><td>Prisma</td><td>6.19.2</td></tr>
+<tr><td>Base de datos</td><td>MySQL (TiDB Cloud)</td><td>8.x</td></tr>
+<tr><td>Cifrado</td><td>bcryptjs</td><td>3.0.3</td></tr>
+<tr><td>Pagos (servidor)</td><td>Stripe SDK</td><td>22.1.0</td></tr>
+<tr><td>Impresión</td><td>node-thermal-printer</td><td>4.6.0</td></tr>
+<p></tbody></table></p>
+
+<h3>7.2 Flujo de desarrollo</h3>
+
+<p></code>`<code>mermaid</p>
+<p>%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px', 'fontFamily': 'arial'}}}%%</p>
+<p>flowchart TB</p>
+
+<p>subgraph F1["Fase 1 — Modelado y Base de Datos"]</p>
+<p>A["1. Diseño del modelo de datos\nschema.prisma: 6 entidades\n(Usuario, Categoria, Producto,\nPedido, DetallePedido, Pago)"]</p>
+<p>B["2. Configuracion de Prisma\nprisma.config.ts + .env\nConexion a TiDB Cloud MySQL"]</p>
+<p>C["3. Generacion del cliente Prisma\nnpx prisma generate\nnpx prisma db push"]</p>
+<p>A --> B --> C</p>
+<p>end</p>
+
+<p>subgraph F2["Fase 2 — Backend API REST"]</p>
+<p>D["4. Singleton PrismaClient\nsrc/lib/prisma.ts\nPatron singleton para hot-reload"]</p>
+<p>E["5. Controladores Express\nproduct / pedido / usuario / payment\nLogica de negocio y validaciones"]</p>
+<p>F["6. Definicion de rutas REST\n/api/productos /api/pedidos\n/api/usuarios /api/pagos"]</p>
+<p>G["7. Servidor Express\nApp.ts + index.ts\nCORS + JSON + listen :3000"]</p>
+<p>D --> E --> F --> G</p>
+<p>end</p>
+
+<p>subgraph F3["Fase 3 — Frontend React"]</p>
+<p>H["8. Contextos globales\nAuthContext (sesion)\nCartContext (carrito)"]</p>
+<p>I["9. Rutas protegidas\nReact Router v7\nloaders por rol (CLIENTE / ADMIN)"]</p>
+<p>J["10. Paginas principales\nLogin / Register / Home\nCategory / Cart / Historial"]</p>
+<p>K["11. Panel de administracion\nGestion pedidos, usuarios\ny productos con formularios"]</p>
+<p>H --> I --> J --> K</p>
+<p>end</p>
+
+<p>subgraph F4["Fase 4 — Integraciones y Cierre"]</p>
+<p>L["12. Integración Stripe\nPaymentIntent en servidor\nStripe Elements en cliente"]</p>
+<p>M["13. Integración impresora termica\nnode-thermal-printer\nESC/POS por TCP :9100"]</p>
+<p>N["14. Seed de imagenes\nseed-imagenes.ts\nActualizacion URLs en BBDD"]</p>
+<p>O["15. Pruebas funcionales\nPruebas manuales + api.http\nValidacion de flujo completo"]</p>
+<p>L --> M --> N --> O</p>
+<p>end</p>
+
+<p>C --> D</p>
+<p>G --> H</p>
+<p>K --> L</p>
+
+<p>classDef fase1 fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a</p>
+<p>classDef fase2 fill:#dcfce7,stroke:#22c55e,color:#14532d</p>
+<p>classDef fase3 fill:#fef9c3,stroke:#eab308,color:#713f12</p>
+<p>classDef fase4 fill:#fce7f3,stroke:#ec4899,color:#831843</p>
+
+<p>class A,B,C fase1</p>
+<p>class D,E,F,G fase2</p>
+<p>class H,I,J,K fase3</p>
+<p>class L,M,N,O fase4</p>
+<p></code>`<code></p>
+
+<h3>7.3 Integración de módulos / componentes</h3>
+
+<p><strong>Integración cliente-servidor:</strong></p>
+
+<p>El servicio </code>src/services/api.ts<code> centraliza todas las llamadas HTTP al backend. Cada función mapea a un endpoint REST:</p>
+
+<p></code>`<code></p>
+<p>GET  /api/productos          → getProductos()</p>
+<p>GET  /api/productos/categorias → getCategorias()</p>
+<p>POST /api/productos          → createProductoAdmin()</p>
+<p>DELETE /api/productos/:id    → deleteProductoAdmin()</p>
+
+<p>POST /api/usuarios/login     → loginUsuario()</p>
+<p>POST /api/usuarios           → registerUsuario()</p>
+<p>GET  /api/usuarios/admin/todos → getAllUsuariosAdmin()</p>
+<p>DELETE /api/usuarios/:id     → deleteUsuarioAdmin()</p>
+
+<p>POST /api/pedidos            → createPedido()</p>
+<p>GET  /api/pedidos/usuario/:id → getPedidosUsuario()</p>
+<p>GET  /api/pedidos/admin      → getAllPedidosAdmin()</p>
+
+<p>POST /api/pagos/create-payment-intent → (Stripe)</p>
+<p></code>`<code></p>
+
+<p><strong>Integración de servicios externos — Stripe:</strong></p>
+
+<ul><li>El frontend llama a </code>POST /api/pagos/create-payment-intent<code> con los artículos del carrito.</li>
+<li>El backend <strong>recalcula el total</strong> consultando los precios reales en la base de datos (seguridad).</li>
+<li>El backend crea un </code>PaymentIntent<code> en Stripe y devuelve el </code>clientSecret<code>.</li>
+<li>El frontend usa </code>Stripe Elements<code> con ese </code>clientSecret<code> para mostrar el formulario de tarjeta y confirmar el pago directamente con Stripe.</li></ul>
+
+<p><strong>Integración de la impresora térmica:</strong></p>
+
+<ul><li>La IP y el puerto de la impresora se configuran en el </code>.env<code> del servidor (</code>PRINTER_IP<code>, </code>PRINTER_PORT<code>).</li>
+<li>Al confirmarse un pedido, el controlador llama a </code>imprimirTicket()<code> del módulo </code>src/lib/printer.ts<code>.</li>
+<li>El módulo intenta conectar por TCP; si no hay conexión, registra un </code>console.warn<code> y continúa sin bloquear al usuario.</li></ul>
+
+<p><strong>Validaciones y seguridad:</strong></p>
+
+<table>
+<thead><tr><th>Validación</th><th>Dónde</th></tr></thead>
+<p><tbody></p>
+<tr><td>Campos obligatorios (nombre, email, password, horario)</td><td></code>usuario.controller.ts<code></td></tr>
+<tr><td>Código secreto para roles TUTOR y ADMIN</td><td></code>usuario.controller.ts<code></td></tr>
+<tr><td>Email único</td><td>Prisma (constraint </code>@unique<code>) + error P2002</td></tr>
+<tr><td>Importe mínimo Stripe (≥ 0.50€)</td><td></code>paymentController.ts<code></td></tr>
+<tr><td>Cálculo de precios en servidor</td><td></code>pedido.controller.ts<code> + </code>paymentController.ts<code></td></tr>
+<tr><td>Rutas protegidas por sesión</td><td></code>routes.ts<code> (loaders de React Router)</td></tr>
+<tr><td>Rutas de admin protegidas por rol</td><td></code>adminLoader<code> en </code>routes.ts<code></td></tr>
+<p></tbody></table></p>
+
+<h3>7.4 Despliegue</h3>
+
+<p><strong>Entorno de desarrollo local:</strong></p>
+
+<p></code>`<code>bash</p>
+<h1>Servidor (puerto 3000)</h1>
+<p>cd server && npm run dev       # nodemon + ts-node</p>
+
+<h1>Cliente (puerto 5173)</h1>
+<p>cd client/Cafeteraescolarapp && npm run dev   # vite</p>
+<p></code>`<code></p>
+
+<p><strong>Variables de entorno:</strong></p>
+
+<table>
+<thead><tr><th>Fichero</th><th>Variable</th><th>Descripción</th></tr></thead>
+<p><tbody></p>
+<tr><td></code>server/.env<code></td><td></code>DATABASE_URL<code></td><td>URL de conexión a TiDB Cloud</td></tr>
+<tr><td></code>server/.env<code></td><td></code>STRIPE_SECRET_KEY<code></td><td>Clave secreta de Stripe (sk_test_…)</td></tr>
+<tr><td></code>server/.env<code></td><td></code>PRINTER_IP<code></td><td>IP de la impresora térmica</td></tr>
+<tr><td></code>server/.env<code></td><td></code>PRINTER_PORT<code></td><td>Puerto TCP de la impresora (9100)</td></tr>
+<tr><td></code>client/…/.env<code></td><td></code>VITE_STRIPE_PK<code></td><td>Clave pública de Stripe (pk_test_…)</td></tr>
+<p></tbody></table></p>
+
+<hr>
+
+<h2>8. Pruebas de Validación</h2>
+
+<p>Las pruebas se realizaron de forma manual sobre el entorno de desarrollo local, con el servidor corriendo en </code>localhost:3000<code> y el cliente en </code>localhost:5173<code>. Se utilizó la herramienta </code>api.http<code> incluida en el repositorio para probar directamente los endpoints del backend.</p>
+
+<h3>8.1 Pruebas funcionales</h3>
+
+<table>
+<thead><tr><th>ID</th><th>Prueba</th><th>Método</th><th>Resultado esperado</th></tr></thead>
+<p><tbody></p>
+<tr><td>PF-01</td><td>Registro con email ya existente</td><td>Manual / HTTP POST</td><td>Error 400: "El email ya está registrado"</td></tr>
+<tr><td>PF-02</td><td>Login con contraseña incorrecta</td><td>Manual / HTTP POST</td><td>Error 401: "Contraseña incorrecta"</td></tr>
+<tr><td>PF-03</td><td>Acceso a </code>/admin<code> sin login</td><td>Manual navegador</td><td>Redirección a </code>/login<code></td></tr>
+<tr><td>PF-04</td><td>Acceso a </code>/admin<code> con rol CLIENTE</td><td>Manual navegador</td><td>Redirección a </code>/<code></td></tr>
+<tr><td>PF-05</td><td>Crear pedido con producto inexistente</td><td>HTTP POST</td><td>Error 400: "Producto con ID X no encontrado"</td></tr>
+<tr><td>PF-06</td><td>Pago con total menor a 0.50€</td><td>HTTP POST</td><td>Error 400: "El total debe ser al menos 0.50€"</td></tr>
+<tr><td>PF-07</td><td>Añadir producto al carrito y modificar cantidad</td><td>Manual navegador</td><td>Cantidad y total actualizados correctamente</td></tr>
+<tr><td>PF-08</td><td>Eliminar usuario (admin sobre sí mismo)</td><td>Manual navegador</td><td>Botón de eliminar no visible para el propio admin</td></tr>
+<tr><td>PF-09</td><td>Crear producto sin categoría</td><td>Manual navegador</td><td>Error de validación en formulario antes de enviar</td></tr>
+<tr><td>PF-10</td><td>Pago exitoso → historial</td><td>Manual navegador</td><td>El pedido aparece en </code>/historial<code> con fecha y total</td></tr>
+<tr><td>PF-11</td><td>Carrito vacío → intento de pago</td><td>Manual navegador</td><td>Botón "Proceder al pago" no disponible sin artículos</td></tr>
+<tr><td>PF-12</td><td>Registro con código de tutor incorrecto</td><td>HTTP POST</td><td>Error 403: "Código de tutor inválido"</td></tr>
+<p></tbody></table></p>
+
+<h3>8.2 Pruebas no funcionales</h3>
+
+<p><strong>Rendimiento:</strong></p>
+<ul><li>El singleton de Prisma evita abrir múltiples conexiones durante el desarrollo con nodemon (hot-reload).</li>
+<li>Las peticiones a la API responden en < 500ms en condiciones normales de red.</li>
+<li>El bundle de producción generado por Vite es optimizado con code-splitting automático.</li></ul>
+
+<p><strong>Seguridad:</strong></p>
+<ul><li>Verificado que el campo </code>password<code> nunca se incluye en las respuestas de </code>/api/usuarios<code>.</li>
+<li>Los precios se recalculan en servidor en </code>createPedido<code> y </code>crearIntentoDePago<code>, evitando que un cliente manipule los importes.</li>
+<li>Las claves API de Stripe y la URL de base de datos están en </code>.env<code> y no se incluyen en el repositorio Git (</code>.gitignore<code>).</li>
+<li>Las contraseñas se almacenan cifradas con bcrypt (salt rounds: 10), verificado inspeccionando la base de datos directamente.</li></ul>
+
+<p><strong>Usabilidad:</strong></p>
+<ul><li>Todos los botones de acción muestran spinner de carga durante la petición HTTP.</li>
+<li>Los errores de red y de validación se muestran con mensajes descriptivos en la interfaz.</li>
+<li>La aplicación es completamente usable en pantallas de 375px (móvil) y 1920px (escritorio).</li>
+<li>El panel de administración adapta su navegación: sidebar lateral en escritorio, barra inferior en móvil.</li></ul>
+
+<h3>8.3 Pruebas de integración</h3>
+
+<table>
+<thead><tr><th>Integración</th><th>Escenario probado</th><th>Resultado</th></tr></thead>
+<p><tbody></p>
+<tr><td>Frontend → Backend</td><td>Obtener lista de productos al cargar </code>/<code></td><td>Productos cargados correctamente desde TiDB Cloud</td></tr>
+<tr><td>Backend → Base de datos</td><td>Crear pedido con transacción atómica</td><td>Cabecera y detalles insertados en una sola operación</td></tr>
+<tr><td>Backend → Stripe</td><td>Solicitar </code>clientSecret<code> para pago de 5.00€</td><td></code>PaymentIntent<code> creado y </code>clientSecret<code> devuelto al frontend</td></tr>
+<tr><td>Frontend → Stripe</td><td>Confirmar pago con tarjeta de prueba </code>4242 4242...<code></td><td>Estado </code>succeeded<code> recibido correctamente</td></tr>
+<tr><td>Backend → Impresora</td><td>Intento de impresión sin impresora conectada</td><td>Advertencia en consola, flujo de usuario no interrumpido</td></tr>
+<p></tbody></table></p>
+
+<hr>
+
+<h2>9. Conclusiones y Líneas de Mejora</h2>
+
+<h3>9.1 Resultados obtenidos</h3>
+
+<p>Se ha logrado implementar una aplicación web fullstack funcional que cubre íntegramente el flujo de pedido en una cafetería escolar, desde el registro del usuario hasta la confirmación del pago y la generación del ticket. La integración de todos los módulos (React + Express + Prisma ORM + TiDB Cloud + Stripe + impresora térmica) funciona de forma coordinada y el sistema es estable en el entorno de desarrollo local.</p>
+
+<p>Durante el desarrollo del proyecto se han aplicado y consolidado conocimientos de todos los módulos del ciclo: programación orientada a objetos (TypeScript), acceso a datos (Prisma + MySQL), desarrollo web en entorno cliente (React + Vite), desarrollo web en entorno servidor (Node.js + Express), y servicios de red (API REST, TCP, HTTPS).</p>
+
+<h3>9.2 Limitaciones detectadas</h3>
+
+<table>
+<thead><tr><th>Limitación</th><th>Descripción</th></tr></thead>
+<p><tbody></p>
+<tr><td>Autenticación básica</td><td>La sesión se gestiona con localStorage sin tokens JWT, lo que no es apto para producción sin mejoras</td></tr>
+<tr><td>Singleton Prisma en payment</td><td></code>paymentController.ts<code> instancia su propio </code>PrismaClient<code> en lugar de usar el singleton compartido, generando conexiones extra</td></tr>
+<tr><td>Sin validación de stock</td><td>No existe un campo de cantidad en stock; los productos simplemente tienen un flag </code>disponible<code></td></tr>
+<tr><td>Sin gestión de estado del pedido</td><td>No hay estados de pedido (pendiente, preparando, listo, entregado)</td></tr>
+<tr><td>Sin notificaciones en tiempo real</td><td>No hay WebSockets ni Server-Sent Events; el admin debe recargar para ver nuevos pedidos</td></tr>
+<tr><td>Imágenes estáticas</td><td>Las imágenes de productos son rutas locales (</code>/CafeSolo.png<code>), no existe gestión de ficheros en servidor</td></tr>
+<p></tbody></table></p>
+
+<h3>9.3 Propuestas de mejora y trabajo futuro</h3>
+
+<ul><li><strong>Autenticación con JWT:</strong> Implementar tokens de acceso firmados con expiración y refresh tokens.</li>
+<li><strong>WebSockets para tiempo real:</strong> Notificar al administrador de nuevos pedidos al instante.</li>
+<li><strong>Estado de pedido con seguimiento:</strong> Añadir un ciclo de vida (PENDIENTE → PREPARANDO → LISTO → ENTREGADO) visible tanto para el cliente como para el administrador.</li>
+<li><strong>Gestión de imágenes:</strong> Integrar un servicio de almacenamiento (Cloudinary, AWS S3) para subir imágenes desde el panel de administración.</li>
+<li><strong>Tests automatizados:</strong> Implementar tests unitarios con Vitest (frontend) y Jest (backend), y tests de integración con Supertest.</li>
+<li><strong>Control de stock:</strong> Añadir un campo </code>stock<code> a los productos y decrementarlo automáticamente con cada pedido.</li>
+<li><strong>Despliegue en producción:</strong> Contenerizar con Docker y desplegar el backend en un servicio como Railway o Render, y el frontend en Vercel o Netlify.</li>
+<li><strong>Aplicación móvil nativa:</strong> Desarrollar una app React Native aprovechando la API REST ya existente.</li></ul>
+
+<hr>
+
+<h2>10. Bibliografía</h2>
+
+<ul><li>Prisma. (2024). <em>Prisma ORM Documentation</em>. https://www.prisma.io/docs</li>
+<li>Stripe, Inc. (2024). <em>Stripe API Reference & React Stripe.js</em>. https://stripe.com/docs</li>
+<li>Meta Open Source. (2024). <em>React Documentation</em>. https://react.dev</li>
+<li>OpenJS Foundation. (2024). <em>Express.js API Reference</em>. https://expressjs.com</li>
+<li>Vite. (2024). <em>Vite Documentation</em>. https://vitejs.dev/guide/</li>
+<li>Tailwind CSS. (2024). <em>Tailwind CSS v4 Documentation</em>. https://tailwindcss.com/docs</li>
+<li>Remix Software. (2024). <em>React Router v7 Documentation</em>. https://reactrouter.com/home</li>
+<li>TiDB Cloud. (2024). <em>TiDB Cloud Documentation</em>. https://docs.pingcap.com/tidbcloud</li>
+<li>Radix UI. (2024). <em>Radix Primitives Documentation</em>. https://www.radix-ui.com/docs/primitives</li>
+<li>node-thermal-printer. (2024). <em>npm package — node-thermal-printer</em>. https://www.npmjs.com/package/node-thermal-printer</li></ul>
+
+<hr>
+
+<h2>11. Anexos</h2>
+
+<h3>11.1 Diagrama de Casos de Uso</h3>
+
+<p></code>`<code>mermaid</p>
+<p>graph LR</p>
+
+<p>%% Actores</p>
+<p>C(["Cliente"])</p>
+<p>T(["Tutor"])</p>
+<p>A(["Admin"])</p>
+<p>SIS(["Sistema"])</p>
+
+<p>%% Casos de uso comunes</p>
+<p>subgraph CU_COMUN["Acceso al sistema"]</p>
+<p>UC01["Registrarse"]</p>
+<p>UC02["Iniciar Sesion"]</p>
+<p>UC16["Cerrar Sesion"]</p>
+<p>end</p>
+
+<p>%% Operaciones del cliente y tutor</p>
+<p>subgraph CU_CLIENTE["Operaciones del cliente"]</p>
+<p>UC03["Ver Categorias"]</p>
+<p>UC04["Ver Productos"]</p>
+<p>UC05["Anadir al Carrito"]</p>
+<p>UC06["Personalizar Producto"]</p>
+<p>UC07["Ver Carrito"]</p>
+<p>UC08["Proceder al Pago"]</p>
+<p>UC09["Confirmar Pago"]</p>
+<p>UC10["Ver Historial"]</p>
+<p>end</p>
+
+<p>%% Administracion</p>
+<p>subgraph CU_ADMIN["Administracion"]</p>
+<p>UC11["Panel Admin"]</p>
+<p>UC12["Gestionar Pedidos"]</p>
+<p>UC13["Gestionar Usuarios"]</p>
+<p>UC14["Gestionar Productos"]</p>
+<p>end</p>
+
+<p>%% Sistema automatico</p>
+<p>subgraph CU_SIS["Sistema automatico"]</p>
+<p>UC15["Imprimir Ticket"]</p>
+<p>end</p>
+
+<p>%% Relaciones Cliente</p>
+<p>C --> UC01</p>
+<p>C --> UC02</p>
+<p>C --> UC03</p>
+<p>C --> UC04</p>
+<p>C --> UC05</p>
+<p>C --> UC07</p>
+<p>C --> UC08</p>
+<p>C --> UC10</p>
+<p>C --> UC16</p>
+
+<p>%% Relaciones Tutor</p>
+<p>T --> UC01</p>
+<p>T --> UC02</p>
+<p>T --> UC03</p>
+<p>T --> UC04</p>
+<p>T --> UC05</p>
+<p>T --> UC07</p>
+<p>T --> UC08</p>
+<p>T --> UC10</p>
+<p>T --> UC16</p>
+
+<p>%% Relaciones Admin</p>
+<p>A --> UC02</p>
+<p>A --> UC11</p>
+<p>A --> UC16</p>
+<p>UC11 --> UC12</p>
+<p>UC11 --> UC13</p>
+<p>UC11 --> UC14</p>
+
+<p>%% Inclusiones</p>
+<p>UC05 -->|include| UC06</p>
+<p>UC08 -->|include| UC09</p>
+<p>UC09 -->|include| UC15</p>
+<p>UC15 --- SIS</p>
+
+<p>%% Estilos</p>
+<p>classDef actor fill:#fef3c7,stroke:#d97706,color:#92400e,font-weight:bold</p>
+<p>classDef usecase fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a</p>
+<p>classDef adm fill:#faf5ff,stroke:#8b5cf6,color:#4c1d95</p>
+<p>classDef sis fill:#f0fdf4,stroke:#22c55e,color:#14532d</p>
+
+<p>class C,T actor</p>
+<p>class A actor</p>
+<p>class SIS sis</p>
+<p>class UC01,UC02,UC03,UC04,UC05,UC06,UC07,UC08,UC09,UC10,UC16 usecase</p>
+<p>class UC11,UC12,UC13,UC14 adm</p>
+<p>class UC15 sis</p>
+<p></code>`<code></p>
+
+<h3>11.2 Diagrama de flujo del proceso de pago</h3>
+
+<p></code>`<code>mermaid</p>
+<p>sequenceDiagram</p>
+<p>actor U as Usuario</p>
+<p>participant FE as Frontend React</p>
+<p>participant BE as Backend Express</p>
+<p>participant ST as Stripe API</p>
+<p>participant DB as TiDB Cloud (MySQL)</p>
+<p>participant PR as Impresora</p>
+
+<p>U->>FE: Clic "Proceder al Pago"</p>
+<p>FE->>BE: POST /api/pagos/create-payment-intent {items}</p>
+<p>BE->>DB: SELECT precio FROM productos WHERE id IN (...)</p>
+<p>DB-->>BE: precios reales</p>
+<p>BE->>ST: paymentIntents.create({amount, currency:'eur'})</p>
+<p>ST-->>BE: {clientSecret}</p>
+<p>BE-->>FE: {clientSecret}</p>
+<p>FE->>U: Muestra formulario Stripe Elements</p>
+<p>U->>FE: Introduce datos de tarjeta y confirma</p>
+<p>FE->>ST: stripe.confirmPayment({clientSecret})</p>
+<p>ST-->>FE: {status: 'succeeded'}</p>
+<p>FE->>BE: POST /api/pedidos {usuarioId, items}</p>
+<p>BE->>DB: INSERT INTO pedidos + detalle_pedidos (transacción)</p>
+<p>DB-->>BE: pedido creado {id}</p>
+<p>BE->>PR: TCP print ticket PED-{id}</p>
+<p>BE-->>FE: 201 {pedido}</p>
+<p>FE->>U: Redirige a /pago-exitoso</p>
+<p></code>`<code></p>
+
+<h3>11.3 Estructura de directorios del proyecto</h3>
+
+<p></code>`<code></p>
+<p>Cafeteraescolarapp/</p>
+<p>├── server/                         # Backend Node.js</p>
+<p>│   ├── prisma/</p>
+<p>│   │   └── schema.prisma           # Esquema de la base de datos</p>
+<p>│   ├── src/</p>
+<p>│   │   ├── App.ts                  # Configuración Express + middlewares + rutas</p>
+<p>│   │   ├── index.ts                # Punto de entrada, listen()</p>
+<p>│   │   ├── controllers/</p>
+<p>│   │   │   ├── product.controller.ts</p>
+<p>│   │   │   ├── pedido.controller.ts</p>
+<p>│   │   │   ├── usuario.controller.ts</p>
+<p>│   │   │   └── paymentController.ts</p>
+<p>│   │   ├── routes/</p>
+<p>│   │   │   ├── product.routes.ts</p>
+<p>│   │   │   ├── pedido.routes.ts</p>
+<p>│   │   │   ├── usuarios.routes.ts</p>
+<p>│   │   │   └── pagos.routes.ts</p>
+<p>│   │   └── lib/</p>
+<p>│   │       ├── prisma.ts           # Singleton PrismaClient</p>
+<p>│   │       └── printer.ts          # Impresión ESC/POS</p>
+<p>│   ├── prisma.config.ts</p>
+<p>│   ├── seed-imagenes.ts            # Script de poblado de imágenes</p>
+<p>│   ├── .env                        # Variables de entorno (no en Git)</p>
+<p>│   └── package.json</p>
+<p>│</p>
+<p>└── client/Cafeteraescolarapp/      # Frontend React</p>
+<p>├── src/</p>
+<p>│   ├── main.tsx                # Punto de entrada React</p>
+<p>│   ├── app/</p>
+<p>│   │   ├── App.tsx             # Providers (Auth + Cart)</p>
+<p>│   │   ├── routes.ts           # Definición de rutas + loaders de protección</p>
+<p>│   │   ├── pages/</p>
+<p>│   │   │   ├── Login.tsx</p>
+<p>│   │   │   ├── Register.tsx</p>
+<p>│   │   │   ├── Home.tsx</p>
+<p>│   │   │   ├── Category.tsx</p>
+<p>│   │   │   ├── Cart.tsx</p>
+<p>│   │   │   ├── Historial.tsx</p>
+<p>│   │   │   ├── PagoExitoso.tsx</p>
+<p>│   │   │   └── AdminPanel.tsx</p>
+<p>│   │   ├── components/</p>
+<p>│   │   │   ├── Header.tsx</p>
+<p>│   │   │   ├── ProductCard.tsx</p>
+<p>│   │   │   ├── CategoryCard.tsx</p>
+<p>│   │   │   ├── CheckoutForm.tsx</p>
+<p>│   │   │   ├── ExtrasModal.tsx</p>
+<p>│   │   │   └── ProductCustomization.tsx</p>
+<p>│   │   └── contexts/</p>
+<p>│   │       ├── AuthContext.tsx</p>
+<p>│   │       └── CartContext.tsx</p>
+<p>│   └── services/</p>
+<p>│       └── api.ts              # Capa de comunicación con el backend</p>
+<p>├── .env                        # Variables de entorno cliente (VITE_STRIPE_PK)</p>
+<p>└── package.json</p>
+<p></code>`<code></p>
+
+<h3>11.4 Endpoints REST de la API</h3>
+
+<table>
+<thead><tr><th>Método</th><th>Ruta</th><th>Descripción</th><th>Acceso</th></tr></thead>
+<p><tbody></p>
+<tr><td>GET</td><td></code>/api/productos<code></td><td>Lista todos los productos con categoría</td><td>Público</td></tr>
+<tr><td>GET</td><td></code>/api/productos/categorias<code></td><td>Lista todas las categorías</td><td>Público</td></tr>
+<tr><td>POST</td><td></code>/api/productos<code></td><td>Crear nuevo producto</td><td>Admin</td></tr>
+<tr><td>PATCH</td><td></code>/api/productos/:id/imagen<code></td><td>Actualizar imagen de producto</td><td>Admin</td></tr>
+<tr><td>DELETE</td><td></code>/api/productos/:id<code></td><td>Eliminar producto</td><td>Admin</td></tr>
+<tr><td>POST</td><td></code>/api/usuarios<code></td><td>Registrar nuevo usuario</td><td>Público</td></tr>
+<tr><td>POST</td><td></code>/api/usuarios/login<code></td><td>Autenticar usuario</td><td>Público</td></tr>
+<tr><td>GET</td><td></code>/api/usuarios/users<code></td><td>Listar todos los usuarios</td><td>Admin</td></tr>
+<tr><td>GET</td><td></code>/api/usuarios/admin/todos<code></td><td>Usuarios con conteo de pedidos</td><td>Admin</td></tr>
+<tr><td>DELETE</td><td></code>/api/usuarios/:id<code></td><td>Eliminar usuario</td><td>Admin</td></tr>
+<tr><td>POST</td><td></code>/api/pedidos<code></td><td>Crear nuevo pedido</td><td>Autenticado</td></tr>
+<tr><td>GET</td><td></code>/api/pedidos<code></td><td>Listar todos los pedidos</td><td>Admin</td></tr>
+<tr><td>GET</td><td></code>/api/pedidos/admin<code></td><td>Pedidos con detalles completos</td><td>Admin</td></tr>
+<tr><td>GET</td><td></code>/api/pedidos/usuario/:id<code></td><td>Pedidos de un usuario</td><td>Autenticado</td></tr>
+<tr><td>POST</td><td></code>/api/pagos/create-payment-intent`</td><td>Crear intento de pago Stripe</td><td>Autenticado</td></tr>
+<p></tbody></table></p>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#dbeafe',
+      primaryTextColor: '#1e3a8a',
+      primaryBorderColor: '#3b82f6',
+      lineColor: '#64748b',
+      fontSize: '12px'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis' },
+    er: { diagramPadding: 20 },
+    sequence: { diagramMarginX: 30, actorMargin: 80 }
+  });
+</script>
+</body>
+</html>

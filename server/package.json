@@ -19,7 +19,7 @@
     "express": "^5.2.1",
     "mysql2": "^3.16.2",
     "node-thermal-printer": "^4.6.0",
-    "stripe": "^22.0.2"
+    "stripe": "^22.1.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
